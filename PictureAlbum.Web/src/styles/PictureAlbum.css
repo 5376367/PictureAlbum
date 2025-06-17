@@ -1,0 +1,91 @@
+﻿/* Styling was generated using an LLM as the assignment specified that UI/UX design carries no weight. */
+
+.container {
+    padding: 20px;
+}
+
+.section {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    background-color: #fafafa;
+}
+
+.label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.textarea {
+    resize: vertical;
+}
+
+.buttonPrimary {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.buttonSecondary {
+    padding: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.buttonBrowser {
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+
+.readOnlyInput {
+    background-color: #f5f5f5;
+    margin-bottom: 6px;
+}
+
+.errorText {
+    color: red;
+    margin-top: 8px;
+}
+
+.successText {
+    color: green;
+    margin-top: 8px;
+}
+
+.pictureList {
+    list-style: none;
+    padding-left: 0;
+}
+
+.pictureListItem {
+    padding: 6px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.noPictures {
+    color: #777;
+    font-style: italic;
+}
