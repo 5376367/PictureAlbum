@@ -16,7 +16,7 @@ A full-stack application with .NET Web API backend and React frontend for managi
 
 ### 2. Backend Setup (.NET Web API)
 1. Open `PictureAlbumAPI.sln` in Visual Studio
-2. Set `PictureAlbumAPI` as startup project
+2. Ensure `PictureAlbumAPI` is slected as startup project
 3. Run with F5
 4. Backend runs at: `https://localhost:7087`
 
