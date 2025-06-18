@@ -26,6 +26,23 @@ namespace PictureAlbumAPI.Services
                 .ToListAsync();
         }
 
+        public async Task<PictureDTO?> GetPictureByIdAsync(int id)
+        {
+            var picture = await _context.Pictures
+                .Where(p => p.Id == id)
+                .Select(p => new PictureDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Date = p.Date,
+                    Description = p.Description,
+                    Content = p.Content // content is the image data in Base64 format
+                })
+                .FirstOrDefaultAsync();
+
+            return picture;
+        }
+
         public async Task<int> CreatePictureAsync(Picture picture)
         {
             _context.Pictures.Add(picture);

@@ -1,8 +1,9 @@
-﻿
-// picture interface cotains only id and name, not the full picture object, since that is all we need to display - it matches the PIctureDTO object from the API
-export interface Picture {
+﻿export interface Picture {
     id: number;
-    name: string;
+    name: string
+    content?: string; // Base64 encoded image content         //these properties only exist when retieving the actual picture and metadata, not the list of pictures
+    date?: string;                                            //
+    description?: string;                                     //
 }
 
 export interface FormDataState {

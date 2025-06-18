@@ -1,12 +1,13 @@
-﻿
-import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
+﻿import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import { Picture, FormDataState } from "../types/index";
-import { fetchPicturesApi, uploadPictureApi } from "../api/index";
+import { fetchPicturesApi, uploadPictureApi, fetchPictureByIdApi } from "../api/index";
 import "../styles/PictureAlbum.css";
 
 const PictureAlbum: React.FC = () => {
-    
+
     const [pictures, setPictures] = useState<Picture[]>([]);
+    const [selectedPicture, setSelectedPicture] = useState<Picture | null>(null);
+    const [loadingDetail, setLoadingDetail] = useState<boolean>(false);
     const [formData, setFormData] = useState<FormDataState>({
         name: "",
         date: "",
@@ -29,6 +30,27 @@ const PictureAlbum: React.FC = () => {
         } catch {
             setError("Failed to load pictures");
         }
+    };
+
+    // Fetch detailed picture information
+    const fetchPictureDetail = async (pictureId: number) => {
+        setLoadingDetail(true);
+        setError("");
+
+        try {
+            const pictureDetail = await fetchPictureByIdApi(pictureId);
+            setSelectedPicture(pictureDetail);
+        } catch (err) {
+            setError("Failed to load picture details");
+            console.error("Error fetching picture detail:", err);
+        } finally {
+            setLoadingDetail(false);
+        }
+    };
+
+    // Handle clicking on a picture item
+    const handlePictureClick = (pictureId: number) => {
+        fetchPictureDetail(pictureId);
     };
 
     // Handle changes to regular text inputs and textarea fields
@@ -86,6 +108,11 @@ const PictureAlbum: React.FC = () => {
         }
     };
 
+    // Close picture detail view
+    const closePictureDetail = () => {
+        setSelectedPicture(null);
+    };
+
     return (
         <div className="container">
             <section className="section">
@@ -95,13 +122,68 @@ const PictureAlbum: React.FC = () => {
                 ) : (
                     <ul className="pictureList">
                         {pictures.map((pic) => (
-                            <li key={pic.id} className="pictureListItem">
+                            <li
+                                key={pic.id}
+                                className="pictureListItem clickable"
+                                onClick={() => handlePictureClick(pic.id)}
+                                style={{ cursor: 'pointer' }}
+                                title="Click to view picture and details"
+                            >
                                 <strong>{pic.id}</strong>: {pic.name}
                             </li>
                         ))}
                     </ul>
                 )}
             </section>
+
+            {/* Picture Detail Section */}
+            {selectedPicture && (
+                <section className="section pictureDetailSection">
+                    <div className="pictureDetailHeader">
+                        <h2>Picture Details</h2>
+                        <button
+                            onClick={closePictureDetail}
+                            className="buttonSecondary closeButton"
+                        >
+                            ✕ Close
+                        </button>
+                    </div>
+
+                    {loadingDetail ? (
+                        <p>Loading picture details...</p>
+                    ) : (
+                        <div className="pictureDetailContent">
+                            <div className="pictureInfo">
+                                <h3>{selectedPicture.name}</h3>
+                                <p><strong>ID:</strong> {selectedPicture.id}</p>
+                                {selectedPicture.date && (
+                                    <p><strong>Date:</strong> {new Date(selectedPicture.date).toLocaleString()}</p>
+                                )}
+                                {selectedPicture.description && (
+                                    <p><strong>Description:</strong> {selectedPicture.description}</p>
+                                )}
+                            </div>
+
+                            {selectedPicture.content && (
+                                <div className="pictureImageContainer">
+                                    <img
+                                        src={`data:image/*;base64,${selectedPicture.content}`}
+                                        alt={selectedPicture.name}
+                                        className="pictureImage"
+                                        style={{
+                                            maxWidth: '100%',
+                                            maxHeight: '400px',
+                                            objectFit: 'contain',
+                                            border: '1px solid #ddd',
+                                            borderRadius: '4px'
+                                        }}
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </section>
+            )}
 
             <section className="section">
                 <h2 style={{ marginBottom: 20 }}>Add New Picture</h2>

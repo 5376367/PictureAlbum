@@ -1,5 +1,4 @@
 ﻿/* Styling was generated using an LLM as the assignment specified that UI/UX design carries no weight. */
-
 .container {
     padding: 20px;
 }
@@ -88,4 +87,103 @@
 .noPictures {
     color: #777;
     font-style: italic;
+}
+
+/* New styles for picture detail functionality */
+.clickable {
+    transition: background-color 0.2s ease;
+}
+
+    .clickable:hover {
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        padding-left: 8px;
+    }
+
+.pictureDetailSection {
+    background-color: #f8f9fa;
+    border-color: #007bff;
+}
+
+.pictureDetailHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+    .pictureDetailHeader h2 {
+        margin: 0;
+        color: #007bff;
+    }
+
+.closeButton {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #6c757d;
+    min-width: auto;
+    flex: none;
+}
+
+    .closeButton:hover {
+        background-color: #5a6268;
+    }
+
+.pictureDetailContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.pictureInfo h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.25rem;
+}
+
+.pictureInfo p {
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+.pictureInfo strong {
+    color: #495057;
+}
+
+.pictureImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+.pictureImage {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+    .pictureImage:hover {
+        transform: scale(1.02);
+    }
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .pictureDetailContent {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .pictureDetailHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .closeButton {
+        align-self: flex-end;
+    }
 }

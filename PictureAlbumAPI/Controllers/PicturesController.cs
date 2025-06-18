@@ -23,6 +23,19 @@ namespace PictureAlbumAPI.Controllers
             return Ok(pictures);
         }
 
+        [HttpGet("{id}", Name = "GetPictureById")]
+        public async Task<ActionResult<PictureDTO>> GetById(int id)
+        {
+            var picture = await _pictureService.GetPictureByIdAsync(id);
+
+            if (picture == null)
+            {
+                return NotFound($"Picture with ID {id} not found");
+            }
+
+            return Ok(picture);
+        }
+
         //Eventhough I think that POST verb would be more appropriate for adding an item, I will use PUT as per the requirement.
         [HttpPut(Name = "AddPicture")]
         public async Task<ActionResult<Picture>> CreatePicture([FromForm] PictureUploadModel model)

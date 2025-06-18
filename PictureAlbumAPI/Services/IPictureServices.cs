@@ -7,5 +7,6 @@ namespace PictureAlbumAPI.Services
     {
         Task<IEnumerable<PictureDTO>> GetPicturesAsync();
         Task<int> CreatePictureAsync(Picture picture);
+        Task<PictureDTO?> GetPictureByIdAsync(int id);
     }
 }

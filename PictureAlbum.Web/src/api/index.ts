@@ -19,3 +19,18 @@ export async function uploadPictureApi(formData: FormData): Promise<void> {
         throw new Error(errorText || "Upload failed");
     }
 }
+
+export const fetchPictureByIdApi = async (id: number): Promise<Picture> => {
+    const response = await fetch(`/api/pictures/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch picture with ID ${id}`);
+    }
+
+    return response.json();
+};
